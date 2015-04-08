@@ -1,0 +1,76 @@
+/*Iphone5, Iphone4, Galaxy S3, S4*/
+
+mobile-font-size = .8em
+
+@media only screen
+  @media (max-width: 768px)
+    body
+      font-size: mobile-font-size
+
+  @media (min-width: 320px) and (max-height: 620px)
+      .how-to-play
+        clear: both
+        display: block
+        margin-right: 10px
+        text-align: right
+
+      .game-info
+        display: none
+        background-color: secondary-bgcolor
+        left: 0
+        padding: 5px
+        position: absolute
+        top: 0
+        height: 620px
+        width: 100%
+        .how-to-play.close
+          display: block
+          text-align: right
+
+  @media (max-height: 414px)
+    body
+      font-size: .5em
+
+    .game, .game-info, .puzzle, .buttons
+      float: left
+
+    .puzzle, .buttons
+      width: auto
+
+    .position, .input
+      line-height: 3.8em
+      height: 3.8em
+      width: 5em
+
+    .buttons
+      margin-top: 0
+
+    ul.row
+      display: table-row
+      .input
+        display: block
+        line-height: 3em
+        height: 3em
+        width: 6.5em
+
+    .how-to-play.open
+      clear: none
+      display: inline-block
+      margin-left: 1%
+      margin-right: 0
+      margin-top: 1%
+
+    .rules
+      height: 414px
+
+    // Iphone 5
+    @media (min-width: 568px)
+      .position
+        width: 6em
+
+    // Iphone 6, S Galaxy S3/S4/Nexus
+    @media (min-width: 640px)
+      .position
+        width: 6.8em
+        line-height: 4.2em
+        height: 4.2em
