@@ -1,0 +1,33 @@
+{
+  "name": "es6-sudoku",
+  "version": "0.0.1",
+  "description": "Functional and stylized Sudoku game",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Abraham Brinez",
+  "license": "MIT",
+  "devDependencies": {
+    "jest-cli": "~0.4.0",
+    "babel-jest": "~5.0.1",
+    "gulp": "~3.8.11",
+    "gulp-stylus": "~2.0.1",
+    "babelify": "~6.0.1",
+    "gulp-babel": "~5.0.0",
+    "browserify": "~9.0.7",
+    "gulp-jade": "~1.0.0",
+    "vinyl-source-stream": "~1.1.0"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "testFileExtensions": [
+      "es6",
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "es6"
+    ]
+  }
+}
