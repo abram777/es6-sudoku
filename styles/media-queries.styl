@@ -10,9 +10,10 @@ mobile-font-size = .8em
   @media (min-width: 320px) and (max-height: 620px)
       .how-to-play
         clear: both
-        display: block
         margin-right: 10px
         text-align: right
+        &.hide
+          display: block
 
       .game-info
         display: none
@@ -46,7 +47,6 @@ mobile-font-size = .8em
       margin-top: 0
 
     ul.row
-      display: table-row
       .input
         display: block
         line-height: 3em

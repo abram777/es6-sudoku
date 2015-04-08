@@ -27,24 +27,24 @@ ul.unstyled
   h1
     text-align: center
     text-transform: uppercase
-  .how-to-play.close
-    display: none
   .game-won-prompt
     text-align: center
 
 
-.how-to-play
-  display: none
-
-
-.game-won-prompt
-  display: none
-  &.show
-    display: block
-
-
-.puzzle, .buttons
+.table
   display: table
+
+
+.inline-table
+  display: inline-table
+
+
+.row
+  display: table-row
+
+
+.cell
+  display: table-cell
 
 
 .puzzle
@@ -58,18 +58,12 @@ ul.unstyled
 
 
 .region
-  display: inline-table
   margin: 2px
-
-
-.row
-  display: table-row
 
 
 .position, .input
   background-color: secondary-bgcolor
   cursor: pointer
-  display: table-cell
   line-height: position-default-box-size
   height: position-default-box-size
   margin: 2px
@@ -85,24 +79,18 @@ ul.unstyled
 .position
   -webkit-transition: background-color .2s
   transition: background-color .2s
+  &.success
+    background-color: position-success-bg-color
+  &.fail
+    background-color: position-fail-bg-color
+  &:before
+    content: "."
+    color: transparent
 
 
-.position:hover, .input:hover
+position:hover, .input:hover
   background-color: position-hover-bg-color
   color: secondary-text-color
-
-
-.position.success
-  background-color: position-success-bg-color
-
-
-.position.fail
-  background-color: position-fail-bg-color
-
-
-.position:before
-  content: "."
-  color: transparent
 
 
 .square

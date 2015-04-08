@@ -15,11 +15,7 @@ export class Region {
         let x = position[0];
         let y = position[1];
 
-        if (x < 0 || x > 2) {
-            return false;
-        }
-
-        if (y < 0 || y > 2) {
+        if ((x < 0 || x > 2) || (y < 0 || y > 2)) {
             return false;
         }
 

@@ -15,7 +15,7 @@ function animateResult(result) {
     selectedPosition.removeClass("success");
     selectedPosition.removeClass("fail");
 
-    if (result !== null) {
+    if (result !== undefined && result !== null) {
         let correspondingResultClass = result ? "success" : "fail";
 
         selectedPosition.addClass(correspondingResultClass);
@@ -47,10 +47,18 @@ export function keyUpEvent(ev, addValueCallback) {
     }
 }
 
-export function positionClickEvent(ev) {
+export function positionClickEvent(ev, previousPositionValidCallback) {
     "use strict";
 
     if (selectedPosition) {
+        let regionNumber = selectedPosition.data("region");
+        let position = convertDataPositionToArray(selectedPosition.data("position"));
+
+        if (previousPositionValidCallback(regionNumber, position)) {
+            selectedPosition.addClass("success");
+        }
+
+        selectedPosition.removeClass("fail");
         selectedPosition.removeClass("selected");
     }
 

@@ -31,7 +31,11 @@ $(function () {
         return result;
     });
 
-    $positions.on("click", dom.positionClickEvent);
+    $positions.on("click", (ev) => {
+        dom.positionClickEvent(ev, (regionNumber, position) => {
+            return puzzle.getRegionByNumber(regionNumber).isPositionOccupied(position);
+        });
+    });
 
     $("body").on("keyup", (ev) => {
         dom.keyUpEvent(ev, addValue, puzzle.remove.bind(puzzle));
