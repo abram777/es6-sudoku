@@ -1,8 +1,8 @@
-#ES6 Sudoku
+# ES6 Sudoku
 
-###How to run:
+### How to run:
 
-**TL;DR:** You can see the game running by going [here](http://4bram.com/sudoku).
+**TL;DR:** You can see the game running by going [here](http://4bram.com/sudoku/).
 
 - Nodejs is required to build the source code.
 
@@ -23,7 +23,7 @@
   This will generate a folder called release which will contain all the files we need to view the game in a browser, by just opening index.html.
 
 
-###Technologies Used
+### Technologies Used
 
 - Javascript (ES6)
 
