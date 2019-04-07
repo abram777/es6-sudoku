@@ -4,23 +4,33 @@
 
 **TL;DR:** You can see the game running by going [here](http://4bram.com/sudoku/).
 
+## Development
+
+### Dependencies
+
+- `nodejs 8.14.x`
+- `parcel 1.10.x`
+- `yarn 1.12.x`
+
+### Building & Testing
+
 - Nodejs is required to build the source code.
 
-- Install required npm packages with:
+- Install required dependencies with:
 
-      npm install
+      yarn
 
-  This will install several things but among the most important ones is **Jest** so we can run tests, and **Gulp** so we can build the source code for release.
+  This will install several things but among the most important ones is **Jest** so we can run tests.
 
 - Run tests with:
 
-      npm test
+      yarn test
 
 - Build the source code with:
 
-      gulp release
+      yarn build
 
-  This will generate a folder called release which will contain all the files we need to view the game in a browser, by just opening index.html.
+  This will generate a folder called `dist` which will contain all the files we need to view the game in a browser, by just opening `index.html`.
 
 
 ### Technologies Used
@@ -29,7 +39,7 @@
 
   It's possible to use es6 in the project with the help of [babeljs](https://babeljs.io/)(formely 6to5), this javascript compiler allows us to use upcoming features while still loading vanilla javascript in the browser (IE9+ compatible). The best example of leveraging the use of a new feature is the Puzzle, and Region objects which were written using the new class syntax. This allows for the creation of more complex objects in a more understandable fashion than what we would otherwise have if we would have written the objects by extending their prototype. [jQuery](https://jquery.com/) is also used heavily for DOM manipulations.
 
-- [Jade](http://jade-lang.com/)
+- [Pug](https://github.com/pugjs/pug)
 
   Layout templates were built with and transpiled to HTML with gulp. Jade is a very simple template language that allows for fast html generation and offers features that make it more mantainable e.g. extending templates and/or including partial templates.
 
@@ -41,12 +51,10 @@
 
   Testing framework based on [jasmine](http://jasmine.github.io/), that has some very cool features most notably automatic mocking. It also comes with packaged with other tools and conventions which make testing very easy and a lot of fun.
 
-- [Gulp](http://gulpjs.com/)
-
-  For build tasks. Thanks to the large amount of plugins available it's possible for to compile the source code from es6 to js, stylus to css, jade to html. Also, the js code is being bundled with [browserify](http://browserify.org/), which has the added benefit of allowing us to write modules like in nodejs, while still working in the browser.
+- [Parcel](https://parceljs.org/)
 
 
-###Improvements + TODOS
+### Improvements + TODOS
 
 The puzzle logic was made in the simplest way posible and with the assumption the game would not scale beyond a 9x9 grid format.
 Time performance was prioritized before memory performance. A profiler can help see how much this sacrifice impacts the game and posibly reveal the bottle necks that would need to be address.

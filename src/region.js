@@ -1,82 +1,64 @@
-import {Position} from "./position";
+class Region {
+  constructor (number) {
+    this.number = number
+    this.grid = {}
+    this.occupiedPositions = {}
+  }
 
-export class Region {
-    constructor(number) {
-        "use strict";
+  static isPositionValid (position) {
+    const x = position[0]
+    const y = position[1]
 
-        this.number = number;
-        this.grid = {};
-        this.occupiedPositions = {};
+    if ((x < 0 || x > 2) || (y < 0 || y > 2)) {
+      return false
     }
 
-    static isPositionValid(position) {
-        "use strict";
+    return true
+  }
 
-        let x = position[0];
-        let y = position[1];
+  containsValue (value) {
+    return Boolean(this.grid[value])
+  }
 
-        if ((x < 0 || x > 2) || (y < 0 || y > 2)) {
-            return false;
-        }
+  add (value, position) {
+    if (this.canAddToGrid(value, position)) {
+      this.grid[value] = position
+      this.occupiedPositions[position.toString()] = true
 
-        return true;
+      return true
+    }
+    return false
+  }
+
+  getValuePosition (value) {
+    return this.grid[value]
+  }
+
+  remove (value) {
+    if (!this.containsValue(value)) {
+      return false
     }
 
-    containsValue(value) {
-        "use strict";
+    this.occupiedPositions[this.getValuePosition(value).toString()] = false
+    delete this.grid[value]
 
-        return !!this.grid[value];
-    }
+    return true
+  }
 
-    add(value, position) {
-        "use strict";
+  isPositionOccupied (position) {
+    return this.occupiedPositions[position.toString()]
+  }
 
-        if (this.canAddToGrid(value, position)) {
-            this.grid[value] = position;
-            this.occupiedPositions[position.toString()] = true;
-
-            return true;
-        }
-        return false;
-    }
-
-    getValuePosition(value) {
-        "use strict";
-
-        return this.grid[value];
-    }
-
-    remove(value) {
-        "use strict";
-
-        if(!this.containsValue(value)) {
-            return false;
-        }
-
-        this.occupiedPositions[this.getValuePosition(value).toString()] = false;
-        delete this.grid[value];
-
-        return true;
-    }
-
-    isPositionOccupied(position) {
-        "use strict";
-
-        return this.occupiedPositions[position.toString()];
-    }
-
-    canAddToGrid(value, position) {
-        "use strict";
-
-        return Region.isPositionValid(position) &&
+  canAddToGrid (value, position) {
+    return Region.isPositionValid(position) &&
                !this.containsValue(value) &&
-               !this.isPositionOccupied(position);
-    }
+               !this.isPositionOccupied(position)
+  }
 
-    isComplete(log) {
-        "use strict";
-
-        if (log) console.log(this.grid);
-        return Object.keys(this.grid).length === 9;
-    }
+  isComplete (log) {
+    if (log) console.log(this.grid)
+    return Object.keys(this.grid).length === 9
+  }
 }
+
+module.exports = { Region }

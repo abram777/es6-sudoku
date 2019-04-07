@@ -1,101 +1,100 @@
-let selectedPosition;
+let selectedPosition
 
-let keys = {
-    49: 1, 50: 2, 51: 3, 52: 4, 53: 5,
-    54: 6, 55: 7, 56: 8, 57: 9
-};
-
-export function convertDataPositionToArray(dataPosition) {
-    return dataPosition.split(",").map(function (point) { return parseInt(point, 10) });
+const keys = {
+  49: 1,
+  50: 2,
+  51: 3,
+  52: 4,
+  53: 5,
+  54: 6,
+  55: 7,
+  56: 8,
+  57: 9
 }
 
-function animateResult(result) {
-    "use strict";
+function convertDataPositionToArray (dataPosition) {
+  return dataPosition.split(',').map(point => parseInt(point, 10))
+}
 
-    selectedPosition.removeClass("success");
-    selectedPosition.removeClass("fail");
+function animateResult (result) {
+  selectedPosition.removeClass('success')
+  selectedPosition.removeClass('fail')
 
-    if (result !== undefined && result !== null) {
-        let correspondingResultClass = result ? "success" : "fail";
+  if (result !== undefined && result !== null) {
+    const correspondingResultClass = result ? 'success' : 'fail'
 
-        selectedPosition.addClass(correspondingResultClass);
+    selectedPosition.addClass(correspondingResultClass)
 
-        return result;
+    return result
+  }
+
+  return false
+}
+
+function keyUpEvent (ev, addValueCallback) {
+  if (selectedPosition) {
+    const keyCode = ev.keyCode
+
+    if (keyCode >= 49 && keyCode <= 57) {
+      const regionNumber = selectedPosition.data('region')
+      const value = keys[keyCode]
+      const position = selectedPosition.data('position')
+
+      // Add to puzzle structure before modifying the DOM
+      const success = animateResult(addValueCallback(regionNumber, value, position))
+
+      if (success) {
+        selectedPosition.text(value)
+      }
+    }
+  }
+}
+
+function positionClickEvent (ev, previousPositionValidCallback) {
+  if (selectedPosition) {
+    const regionNumber = selectedPosition.data('region')
+    const position = convertDataPositionToArray(selectedPosition.data('position'))
+
+    if (previousPositionValidCallback(regionNumber, position)) {
+      selectedPosition.addClass('success')
     }
 
-    return false;
+    selectedPosition.removeClass('fail')
+    selectedPosition.removeClass('selected')
+  }
+
+  selectedPosition = $(ev.target)
+  selectedPosition.addClass('selected')
 }
 
-export function keyUpEvent(ev, addValueCallback) {
-    "use strict";
+function inputClickEvent (ev, addValueCallback, removeCallback) {
+  if (selectedPosition) {
+    const $input = $(ev.target)
+    const regionNumber = selectedPosition.data('region')
+    const value = $input.text()
 
-    if (selectedPosition) {
-        let keyCode = ev.keyCode;
+    if ($input && $input.hasClass('remove')) {
+      const success = removeCallback(regionNumber, selectedPosition.text())
 
-        if (keyCode >= 49 && keyCode <= 57) {
-            let regionNumber = selectedPosition.data("region");
-            let value = keys[keyCode];
-            let position = selectedPosition.data("position");
+      if (success) {
+        animateResult()
+        selectedPosition.text('')
+      }
+    } else {
+      const position = selectedPosition.data('position')
+      const success = animateResult(addValueCallback(regionNumber, value, position))
 
-            // Add to puzzle structure before modifying the DOM
-            let success = animateResult(addValueCallback(regionNumber, value, position));
-
-            if (success) {
-                selectedPosition.text(value);
-            }
-        }
+      if (success) {
+        selectedPosition.text(value)
+      }
     }
+  }
 }
 
-export function positionClickEvent(ev, previousPositionValidCallback) {
-    "use strict";
+function howToPlayClickEvent (ev, $htmlElement) {
+  ev.preventDefault()
 
-    if (selectedPosition) {
-        let regionNumber = selectedPosition.data("region");
-        let position = convertDataPositionToArray(selectedPosition.data("position"));
-
-        if (previousPositionValidCallback(regionNumber, position)) {
-            selectedPosition.addClass("success");
-        }
-
-        selectedPosition.removeClass("fail");
-        selectedPosition.removeClass("selected");
-    }
-
-    selectedPosition = $(ev.target);
-    selectedPosition.addClass("selected");
+  $htmlElement.toggleClass('show')
 }
 
-export function inputClickEvent(ev, addValueCallback, removeCallback) {
-    "use strict";
-
-    if (selectedPosition) {
-        let $input = $(ev.target);
-        let regionNumber = selectedPosition.data("region");
-        let value = $input.text();
-
-        if ($input && $input.hasClass("remove")) {
-            let success = removeCallback(regionNumber, selectedPosition.text());
-
-            if (success) {
-                animateResult();
-                selectedPosition.text("");
-            }
-        } else {
-            let position = selectedPosition.data("position");
-            let success = animateResult(addValueCallback(regionNumber, value, position));
-
-            if (success) {
-                selectedPosition.text(value);
-            }
-        }
-
-    }
-}
-
-export function howToPlayClickEvent(ev, $htmlElement) {
-    "use strict";
-    ev.preventDefault();
-
-    $htmlElement.toggleClass("show");
-}
+module.exports = { convertDataPositionToArray, keyUpEvent, positionClickEvent, inputClickEvent, howToPlayClickEvent }

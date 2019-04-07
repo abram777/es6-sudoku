@@ -1,5 +1,7 @@
 *.idea
 *release
+dist
+.cache
 
 # Logs
 logs

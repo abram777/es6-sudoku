@@ -3,31 +3,30 @@
   "version": "0.0.1",
   "description": "Functional and stylized Sudoku game",
   "scripts": {
-    "test": "jest"
+    "jest": "jest",
+    "test": "standard; jest",
+    "dev": "parcel src/templates/index.pug",
+    "build": "parcel build src/templates/index.pug",
+    "lint": "standard",
+    "lintf": "standard --fix"
   },
   "author": "Abraham Brinez",
   "license": "MIT",
   "devDependencies": {
-    "jest-cli": "~0.4.0",
-    "babel-jest": "~5.0.1",
-    "gulp": "~3.8.11",
-    "gulp-stylus": "~2.0.1",
-    "babelify": "~6.0.1",
-    "gulp-babel": "~5.0.0",
-    "browserify": "~9.0.7",
-    "gulp-jade": "~1.0.0",
-    "vinyl-source-stream": "~1.1.0"
+    "babel-jest": "^24.0.0",
+    "babel-preset-env": "^1.7.0",
+    "cssnano": "^4.1.8",
+    "jest-cli": "^24.0.0",
+    "pug": "^2.0.3",
+    "standard": "^12.0.1",
+    "stylus": "^0.54.5"
   },
   "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "testFileExtensions": [
-      "es6",
-      "js"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "es6"
-    ]
+    "transform": {
+      ".*": "<rootDir>/node_modules/babel-jest"
+    }
+  },
+  "standard": {
+    "globals": ["jest", "$"]
   }
 }
